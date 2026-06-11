@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_dark">#FF14122B</color>
+    <color name="bg_drawer">#FF1E1B3C</color>
+    <color name="neon_cyan">#FF00F5FF</color>
+    <color name="neon_yellow">#FFFFEB3B</color>
+    <color name="neon_magenta">#FFFF2BD6</color>
+    <color name="neon_lime">#FF8BFF2B</color>
+    <color name="neon_red">#FFFF4D6A</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

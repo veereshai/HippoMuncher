@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+android {
+    namespace 'com.family.hippomuncher'
+    // compileSdk 33 is required by current AndroidX libs; min/target stay locked at 28
+    // so no API > 28 behavior is ever requested on the Portal's Android 9 OS.
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.family.hippomuncher"
+        minSdk 28
+        targetSdk 28
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("${System.getProperty('user.home')}/.android/debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // CameraX — last line fully validated on API 28 hardware
+    def camerax_version = '1.2.3'
+    implementation "androidx.camera:camera-core:$camerax_version"
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    implementation "androidx.camera:camera-view:$camerax_version"
+
+    // ML Kit on-device Face Detection (bundled model — no Play Services download
+    // needed, which matters on Portal devices without full GMS)
+    implementation 'com.google.mlkit:face-detection:16.1.5'
+}
