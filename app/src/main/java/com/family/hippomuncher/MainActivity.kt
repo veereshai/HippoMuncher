@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Size
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -43,6 +44,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Face-controlled game: the player never touches the screen, so nothing
+        // resets the system screen-off timer. Hold the screen on while we're in
+        // the foreground so the Portal's screensaver can't cut in mid-game.
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         drawer = findViewById(R.id.drawerLayout)
         gameView = findViewById(R.id.gameSurface)
